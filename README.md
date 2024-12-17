@@ -39,7 +39,21 @@ GitHubActions / Heroku Deployment - to consider
 
 # Work progress
 
-| Item                                      | Status        |
-|-------------------------------------------|---------------|
-| Django/DRF intial project setup           | [DONE]        |
-| Models creation                           | [NOT STARTED] |
+| Item                            | Status        |
+|---------------------------------|---------------|
+| Django/DRF intial project setup | [DONE]        |
+| Shell Plus setup                | [DONE]        |
+| Models creation                 | [NOT STARTED] |
+
+
+#### Notes
+```
+Setuping Django ShellPlus:
+- pip install django-extensions
+- pip install ipython
+- add "django_extensions" to INSTALLED_APPS
+
+and using:
+ - python manage.py shell_plus
+ - python manage.py shell_plus --ipython
+```
