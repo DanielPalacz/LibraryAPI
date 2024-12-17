@@ -9,11 +9,11 @@ Goals A:
  - practising defining models and relationships (OneToMany, ManyToMany)
    - OneToMany: 1 Autor => Many Books
    - ManyToMany: 1 Book <=> Many Categories, 1 Category <=> Many Books
- - practising creating serializers (inc: handling errors, data validations)  
+ - practising creating serializers (inc: handling errors, data validations)
  - practising creating views using DRF builtins
  - checking routers potential, if it's worth using (checking default documentation that is created)
- 
- 
+
+
 Goals B:
  - checking Django authorization/authentication builtins (views, login_required decorator)
  - checking JWT tokens (djangorestframework-simplejwt)
@@ -29,7 +29,7 @@ GitHubActions / Heroku Deployment - to consider
 
 ### Library system functionalities:
 ```
-- adding book item to specific category in the system  
+- adding book item to specific category in the system
 - displaying all categories from the system
 - displaying all books from the given category
 - displaying all books writen by then given Autor
@@ -42,7 +42,8 @@ GitHubActions / Heroku Deployment - to consider
 | Item                            | Status        |
 |---------------------------------|---------------|
 | Django/DRF intial project setup | [DONE]        |
-| Shell Plus setup                | [DONE]        |
+| shell plus setup                | [DONE]        |
+| precommit/mypy  setup           | [DONE]        |
 | Models creation                 | [NOT STARTED] |
 
 
@@ -52,8 +53,18 @@ Setuping Django ShellPlus:
 - pip install django-extensions
 - pip install ipython
 - add "django_extensions" to INSTALLED_APPS
-
 and using:
  - python manage.py shell_plus
  - python manage.py shell_plus --ipython
+
+
+Setupping precommit and mypy:
+- pre-commit install
+- pip install mypy
+- pip install extended-mypy-django-plugin
+- pip install django-stubs django-stubs-ext
+- files: .pre-commit-config.yaml, mypy.ini
+
+pip install pre-commit
+pre-commit install
 ```
