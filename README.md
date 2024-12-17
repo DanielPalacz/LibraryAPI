@@ -36,3 +36,10 @@ GitHubActions / Heroku Deployment - to consider
 - editing previously added book item
 - removing book item completely
 ```
+
+# Work progress
+
+| Item                                      | Status        |
+|-------------------------------------------|---------------|
+| Django/DRF intial project setup           | [DONE]        |
+| Models creation                           | [NOT STARTED] |
