@@ -67,4 +67,14 @@ Setupping precommit and mypy:
 
 pip install pre-commit
 pre-commit install
+
+
+Generating model diagrams:
+- sudo apt-get install graphviz graphviz-dev
+- pip install django-extensions
+- pip install pygraphviz
+- export DJANGO_SETTINGS_MODULE=LibraryProject.settings
+
+python manage.py graph_models library_api -o LibraryAPI_Model_diagram_class_for_dedicated_api.png
+python manage.py graph_models -a -o LibraryAPI_Model_DiagramClass_for_all_apps.png
 ```
