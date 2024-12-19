@@ -39,19 +39,20 @@ GitHubActions / Heroku Deployment - to consider
 
 # Work progress
 
-| Item                                   | Comment | Status        |
-|----------------------------------------|---------|---------------|
-| Django/DRF initial project setup       | -       | [DONE]        |
-| shell plus setup                       | -       | [DONE]        |
-| precommit/mypy  setup                  | -       | [DONE]        |
-| Models creation                        | -       | [DONE]        |
-| Auto-generating diagram class          | -       | [DONE]        |
-| Testing / Playing with pytest-django   | -       | [IN PROGRESS] |
-| Serializers (inc. errors, validations) | -       | [IN PROGRESS] |
-| Views                                  | -       | [IN PROGRESS] |
+| Item                                            | Comment | Status        |
+|-------------------------------------------------|---------|---------------|
+| Django/DRF initial project setup                | -       | [DONE]        |
+| shell plus setup                                | -       | [DONE]        |
+| precommit/mypy  setup                           | -       | [DONE]        |
+| Models creation                                 | -       | [DONE]        |
+| Auto-generating diagram class                   | -       | [DONE]        |
+| Automation Testing / Playing with pytest-django | -       | [IN PROGRESS] |
+| DRF Serializers (errors, validations)           | -       | [IN PROGRESS] |
+| Views, builtin DRF views                        | -       | [IN PROGRESS] |
+| DRF Routers                                     | -       | [IN PROGRESS] |
+| Manual testing (curl, Postman)                  | -       | [IN PROGRESS] |
 
 #
-
 #### Work progress, notes
 ```
 Setuping Django ShellPlus:
