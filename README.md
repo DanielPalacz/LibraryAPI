@@ -39,14 +39,16 @@ GitHubActions / Heroku Deployment - to consider
 
 # Work progress
 
-| Item                                 | Comment | Status        |
-|--------------------------------------|---------|---------------|
-| Django/DRF initial project setup     | -       | [DONE]        |
-| shell plus setup                     | -       | [DONE]        |
-| precommit/mypy  setup                | -       | [DONE]        |
-| Models creation                      | -       | [DONE]        |
-| Auto-generating diagram class        | -       | [DONE]        |
-| Testing / Playing with pytest-django | -       | [IN PROGRESS] |
+| Item                                   | Comment | Status        |
+|----------------------------------------|---------|---------------|
+| Django/DRF initial project setup       | -       | [DONE]        |
+| shell plus setup                       | -       | [DONE]        |
+| precommit/mypy  setup                  | -       | [DONE]        |
+| Models creation                        | -       | [DONE]        |
+| Auto-generating diagram class          | -       | [DONE]        |
+| Testing / Playing with pytest-django   | -       | [IN PROGRESS] |
+| Serializers (inc. errors, validations) | -       | [IN PROGRESS] |
+| Views                                  | -       | [IN PROGRESS] |
 
 #
 
@@ -88,3 +90,38 @@ Testing / Playing with pytest-django:
 - PYTHONPATH=. pytest -vv tests/
 - PYTHONPATH=. pytest -s -vv tests/
 ```
+
+
+### DRF and Serializers:
+```
+What are Serializers in DRF?
+ - it is functionality translating data between "Python Django world" and "API formats world"
+Serializers responsibilities:
+ - serialization / deserialization
+ - data validation
+
+Commonly used builtin serializers:
+ - serializers.ModelSerializer
+ - serializers.HyperlinkedModelSerializer
+
+Other builtin serializers:
+- serializers.Serializer (not related by default with Django model)
+- serializers.ListSerializer
+- serializers.BaseSerializer
+```
+
+
+### Builtin view, viewsets.ModelViewSet
+```
+- with router configuration, it gives Full set of CRUD endpoints
+- below 'categories' example
+```
+
+| Method    | Endpoint              | Description                                 |
+|-----------|-----------------------|---------------------------------------------|
+| GET	     | /categories/	         | Fetching list of all categories             |
+| GET	     | /categories/<id>/	 | Fetching details about the given category   |
+| POST	     | /categories/	         | Creating new category                       |
+| PUT	     | /categories/<id>/	 | Full actualization of the given category    |
+| PATCH	 | /categories/<id>/	 | Partial actualization of the given category |
+| DELETE    | 	/categories/<id>/	 | Del;eting existing category                 |
