@@ -39,12 +39,14 @@ GitHubActions / Heroku Deployment - to consider
 
 # Work progress
 
-| Item                            | Status        |
-|---------------------------------|---------------|
-| Django/DRF intial project setup | [DONE]        |
-| shell plus setup                | [DONE]        |
-| precommit/mypy  setup           | [DONE]        |
-| Models creation                 | [NOT STARTED] |
+| Item                            | Status  |
+|---------------------------------|---------|
+| Django/DRF intial project setup | [DONE]  |
+| shell plus setup                | [DONE]  |
+| precommit/mypy  setup           | [DONE]  |
+| Models creation                 | [DONE]  |
+| Auto-generating diagram class   | [DONE]  |
+| Playing with pytest-django      | [DONE]  |
 
 
 #### Notes
@@ -77,4 +79,9 @@ Generating model diagrams:
 
 python manage.py graph_models library_api -o LibraryAPI_Model_diagram_class_for_dedicated_api.png
 python manage.py graph_models -a -o LibraryAPI_Model_DiagramClass_for_all_apps.png
+
+
+Testing:
+ - PYTHONPATH=. pytest -vv tests/
+ - PYTHONPATH=. pytest -s -vv tests/
 ```
