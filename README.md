@@ -125,4 +125,4 @@ Other builtin serializers:
 | POST	     | /categories/	         | Creating new category                       |
 | PUT	     | /categories/<id>/	 | Full actualization of the given category    |
 | PATCH	 | /categories/<id>/	 | Partial actualization of the given category |
-| DELETE    | 	/categories/<id>/	 | Del;eting existing category                 |
+| DELETE    | 	/categories/<id>/	 | Deleting existing category                  |
