@@ -22,7 +22,8 @@ PYTHONPATH=. python tests/populate_db.py
 table=$(curl -X GET -H "Content-Type: application/json" --silent 'http://127.0.0.1:8000/categories/')
 table_size=$(echo "$table" | jq '. | length')
 
-if [ $table_size == 7 ]; then
+
+if [[ $table_size == 7 ]]; then
     echo "Database was populated correctly and has 7 elements."
 else
     echo "Database was not populated correctly. It doesnt have 7 elements."
@@ -81,7 +82,7 @@ echo
 
 
 echo ""
-echo "ACTION 7 - CHECKING DELETINF CATEGORY OBJECT 'DELETE /categories/<id>'"
+echo "ACTION 7 - CHECKING DELETING CATEGORY OBJECT 'DELETE /categories/<id>'"
 
 category_id=$(curl -X GET -H "Content-Type: application/json" --silent 'http://127.0.0.1:8000/categories/' | jq .[-1].id)
 echo "Now, we are removing category object using 'DELETE /categories/$category_id/':"
