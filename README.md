@@ -39,17 +39,18 @@ GitHubActions / Heroku Deployment - to consider
 
 # Work progress
 
-| Item                            | Status  |
-|---------------------------------|---------|
-| Django/DRF intial project setup | [DONE]  |
-| shell plus setup                | [DONE]  |
-| precommit/mypy  setup           | [DONE]  |
-| Models creation                 | [DONE]  |
-| Auto-generating diagram class   | [DONE]  |
-| Playing with pytest-django      | [DONE]  |
+| Item                                 | Comment | Status        |
+|--------------------------------------|---------|---------------|
+| Django/DRF initial project setup     | -       | [DONE]        |
+| shell plus setup                     | -       | [DONE]        |
+| precommit/mypy  setup                | -       | [DONE]        |
+| Models creation                      | -       | [DONE]        |
+| Auto-generating diagram class        | -       | [DONE]        |
+| Testing / Playing with pytest-django | -       | [IN PROGRESS] |
 
+#
 
-#### Notes
+#### Work progress, notes
 ```
 Setuping Django ShellPlus:
 - pip install django-extensions
@@ -81,7 +82,9 @@ python manage.py graph_models library_api -o LibraryAPI_Model_diagram_class_for_
 python manage.py graph_models -a -o LibraryAPI_Model_DiagramClass_for_all_apps.png
 
 
-Testing:
- - PYTHONPATH=. pytest -vv tests/
- - PYTHONPATH=. pytest -s -vv tests/
+Testing / Playing with pytest-django:
+- dynamically creating DB setup
+- adding specific 'test' settings.py file where sqlite3 is 'in memory' mode
+- PYTHONPATH=. pytest -vv tests/
+- PYTHONPATH=. pytest -s -vv tests/
 ```
