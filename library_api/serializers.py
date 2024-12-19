@@ -8,4 +8,4 @@ from .models import BookCategory
 class BookCategorySerializer(serializers.HyperlinkedModelSerializer):  # type: ignore
     class Meta:
         model = BookCategory
-        fields = ("name", "parent")
+        fields = ("id", "name", "parent")
