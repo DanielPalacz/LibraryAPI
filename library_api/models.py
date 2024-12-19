@@ -11,6 +11,9 @@ class Author(models.Model):
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["first_name", "last_name"], name="unique_full_name")]
+
 
 class BookCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -24,7 +27,7 @@ class BookCategory(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
     category = models.ManyToManyField(BookCategory, related_name="books")
     created_at = models.DateTimeField(auto_now_add=True)
