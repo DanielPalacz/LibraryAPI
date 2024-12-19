@@ -37,6 +37,29 @@ def test_endpoints_post_categories(live_server):
     assert len(response_data) == 8
 
 
+def test_endpoints_post_two_the_same_categories(live_server):
+    url = f"{live_server.url}/" + "categories/"
+    data = {"name": "NewCategoryAuto"}
+
+    response = requests.post(url, data=data)
+    assert response.status_code == 200 or response.status_code == 201
+
+    response_data = response.json()
+    assert list(response_data.keys()) == ["id", "name", "parent"]
+    assert response_data["name"] == "NewCategoryAuto"
+    assert response_data["parent"] is None
+
+    response = requests.get(url)
+    assert response.status_code == 200
+    response_data = response.json()
+    assert len(response_data) == 8
+
+    response = requests.post(url, data=data)
+    assert response.status_code == 400
+    assert response.reason == "Bad Request"
+    assert response.text == '{"name":["book category with this name already exists."]}'
+
+
 def test_endpoints_get_single_category(live_server):
     url = f"{live_server.url}/" + "categories/"
     response = requests.get(url)

@@ -13,7 +13,7 @@ class Author(models.Model):
 
 
 class BookCategory(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL, related_name="subcategories")
 
     def __str__(self) -> str:

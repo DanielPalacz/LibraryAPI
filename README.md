@@ -87,6 +87,7 @@ python manage.py graph_models -a -o LibraryAPI_Model_DiagramClass_for_all_apps.p
 
 Testing / Playing with pytest-django:
 - dynamically creating DB setup
+- live_server awesome builtin fixture
 - adding specific 'test' settings.py file where sqlite3 is 'in memory' mode
 - PYTHONPATH=. pytest -vv tests/
 - PYTHONPATH=. pytest -s -vv tests/
