@@ -61,6 +61,21 @@ class BookCategoryViewSet(viewsets.ModelViewSet):  # type: ignore
 
 
 @extend_schema(
+    tags=["Category books"],
+    responses=BookSerializer(many=True),
+)
+class CategoryBooksView(ListAPIView):  # type: ignore
+    """The given Book category books."""
+
+    serializer_class = BookSerializer
+
+    def get_queryset(self) -> QuerySet:  # type: ignore
+        category_id = self.kwargs["pk"]
+        book_category = get_object_or_404(BookCategory, pk=category_id)
+        return book_category.books.all()
+
+
+@extend_schema(
     tags=["Root view"],
 )
 class CustomApiRootView(APIView):  # type: ignore
@@ -85,6 +100,7 @@ class CustomApiRootView(APIView):  # type: ignore
                 "books": "/books/",
                 "categories": "/categories/",
                 "author-books": "/author/<int:pk>/books/",  # Custom endpoint added
+                "category-books": "/category/<int:pk>/books/",  # Custom endpoint added
                 "schema": "/api/schema/",
                 "swagger-ui": "/api/schema/swagger-ui/",
                 "redoc": "/api/schema/redoc/",

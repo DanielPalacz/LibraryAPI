@@ -54,11 +54,11 @@ GitHubActions / Heroku Deployment - to consider
 | Manual testing (curl, Postman)                      | -       | [IN PROGRESS] |
 | coverage package for test coverage metrics          | -       | [DONE]        |
 | displaying all categories from the system           | [F]     | [DONE]        |
-| adding book item to specific category in the system | [F]     | [IN PROGRESS] |
-| displaying all books from the given category        | [F]     | [NOT STARTED] |
-| displaying all books writen by then given Autor     | [F]     | [DONE] |
-| editing previously added book item                  | [F]     | [IN PROGRESS] |
-| removing book item completely                       | [F]     | [IN PROGRESS] |
+| adding book item to specific category in the system | [F]     | [DONE]        |
+| displaying all books from the given category        | [F]     | [IN PROGRESS] |
+| displaying all books writen by then given Autor     | [F]     | [DONE]        |
+| editing previously added book item                  | [F]     | [DONE]        |
+| removing book item completely                       | [F]     | [DONE]        |
 | displaying all authors from the system              | [F]     | [DONE]        |
 
 #
@@ -126,8 +126,7 @@ Other builtin serializers:
 
 ### Builtin view, viewsets.ModelViewSet
 ```
-- with router configuration, it gives Full set of CRUD endpoints
-- below 'categories' example
+- with router configuration, it gives Full set of CRUD endpoints, below 'categories' example
 ```
 
 | Method    | Endpoint              | Description                                 |
