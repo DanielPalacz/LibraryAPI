@@ -56,7 +56,7 @@ GitHubActions / Heroku Deployment - to consider
 | displaying all categories from the system           | [F]     | [DONE]        |
 | adding book item to specific category in the system | [F]     | [IN PROGRESS] |
 | displaying all books from the given category        | [F]     | [NOT STARTED] |
-| displaying all books writen by then given Autor     | [F]     | [NOT STARTED] |
+| displaying all books writen by then given Autor     | [F]     | [DONE] |
 | editing previously added book item                  | [F]     | [IN PROGRESS] |
 | removing book item completely                       | [F]     | [IN PROGRESS] |
 | displaying all authors from the system              | [F]     | [DONE]        |
