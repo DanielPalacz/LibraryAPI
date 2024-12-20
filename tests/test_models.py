@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import django.db.utils
 import pytest
 from django.db import connection
 
@@ -43,3 +44,20 @@ def test_book_with_two_categories():
     assert book_item.title == "All About the Bullerby Children"
     assert "Astrid Lindgren" in str(book_item.author)
     assert [category.name for category in book_item.category.all()] == ["For children", "Required book"]
+
+
+@pytest.mark.django_db()
+def test_author_not_exists():
+    with pytest.raises(Author.DoesNotExist):
+        Author.objects.get(first_name="John", last_name="Dove")
+
+
+@pytest.mark.django_db()
+def test_author_duplicate():
+    with pytest.raises(django.db.utils.IntegrityError) as e:
+        author_object1 = Author(first_name="John", last_name="Dove")
+        author_object1.save()
+        author_object2 = Author(first_name="John", last_name="Dove")
+        author_object2.save()
+
+    assert "UNIQUE constraint failed: library_api_author.first_name, library_api_author.last_name" == str(e.value)

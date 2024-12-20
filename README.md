@@ -31,6 +31,7 @@ GitHubActions / Heroku Deployment - to consider
 ```
 - adding book item to specific category in the system
 - displaying all categories from the system
+- displaying all authors from the system
 - displaying all books from the given category
 - displaying all books writen by then given Autor
 - editing previously added book item
@@ -39,19 +40,26 @@ GitHubActions / Heroku Deployment - to consider
 
 # Work progress
 
-| Item                                            | Comment | Status        |
-|-------------------------------------------------|---------|---------------|
-| Django/DRF initial project setup                | -       | [DONE]        |
-| shell plus setup                                | -       | [DONE]        |
-| precommit/mypy  setup                           | -       | [DONE]        |
-| Models creation                                 | -       | [DONE]        |
-| Auto-generating diagram class                   | -       | [DONE]        |
-| Automation Testing / Playing with pytest-django | -       | [IN PROGRESS] |
-| DRF Serializers (errors, validations)           | -       | [IN PROGRESS] |
-| Views, builtin DRF views                        | -       | [IN PROGRESS] |
-| DRF Routers                                     | -       | [IN PROGRESS] |
-| Manual testing (curl, Postman)                  | -       | [IN PROGRESS] |
-| coverage package for test coverage metrics      | -       | [DONE]        |
+| Item                                                | Comment | Status        |
+|-----------------------------------------------------|---------|---------------|
+| Django/DRF initial project setup                    | -       | [DONE]        |
+| shell plus setup                                    | -       | [DONE]        |
+| precommit/mypy  setup                               | -       | [DONE]        |
+| Models creation                                     | -       | [DONE]        |
+| Auto-generating diagram class                       | -       | [DONE]        |
+| Automation Testing / Playing with pytest-django     | -       | [IN PROGRESS] |
+| DRF Serializers (errors, validations)               | -       | [IN PROGRESS] |
+| Views, builtin DRF views                            | -       | [IN PROGRESS] |
+| DRF Routers                                         | -       | [IN PROGRESS] |
+| Manual testing (curl, Postman)                      | -       | [IN PROGRESS] |
+| coverage package for test coverage metrics          | -       | [DONE]        |
+| displaying all categories from the system           | [F]     | [DONE]        |
+| adding book item to specific category in the system | [F]     | [IN PROGRESS] |
+| displaying all books from the given category        | [F]     | [NOT STARTED] |
+| displaying all books writen by then given Autor     | [F]     | [NOT STARTED] |
+| editing previously added book item                  | [F]     | [IN PROGRESS] |
+| removing book item completely                       | [F]     | [IN PROGRESS] |
+| displaying all authors from the system              | [F]     | [NOT STARTED] |
 
 #
 #### Work progress, notes
