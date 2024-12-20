@@ -51,6 +51,7 @@ GitHubActions / Heroku Deployment - to consider
 | Views, builtin DRF views                        | -       | [IN PROGRESS] |
 | DRF Routers                                     | -       | [IN PROGRESS] |
 | Manual testing (curl, Postman)                  | -       | [IN PROGRESS] |
+| coverage package for test coverage metrics      | -       | [DONE]        |
 
 #
 #### Work progress, notes
@@ -85,12 +86,14 @@ python manage.py graph_models library_api -o LibraryAPI_Model_diagram_class_for_
 python manage.py graph_models -a -o LibraryAPI_Model_DiagramClass_for_all_apps.png
 
 
-Testing / Playing with pytest-django:
-- dynamically creating DB setup
+Testing / Playing with pytest-django, notes:
+- dynamically creating DB setup, adding specific 'test' settings.py file where sqlite3 is 'in memory' mode
 - live_server awesome builtin fixture
-- adding specific 'test' settings.py file where sqlite3 is 'in memory' mode
+- integrated coverage package for test coverage metrics
+Running:
 - PYTHONPATH=. pytest -vv tests/
 - PYTHONPATH=. pytest -s -vv tests/
+- PYTHONPATH=. pytest -vv --cov-report=html:TestCoverageReport tests/
 ```
 
 
