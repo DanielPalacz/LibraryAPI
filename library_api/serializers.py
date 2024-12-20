@@ -9,3 +9,9 @@ class BookCategorySerializer(serializers.HyperlinkedModelSerializer):  # type: i
     class Meta:
         model = BookCategory
         fields = ("id", "name", "parent")
+
+    @staticmethod
+    def validate_name(value: str) -> str:
+        if len(value) < 3:
+            raise serializers.ValidationError("Category name should have at least 3 letters.")
+        return value
