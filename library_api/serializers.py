@@ -5,6 +5,7 @@ from typing import Any
 from rest_framework import serializers  # type: ignore
 
 from .models import Author
+from .models import Book
 from .models import BookCategory
 
 
@@ -24,6 +25,12 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):  # type: ignore
         if len(value) < 2 or value == "-":
             raise serializers.ValidationError("Last name should have at least 2 letters.")
         return value
+
+
+class BookSerializer(serializers.HyperlinkedModelSerializer):  # type: ignore
+    class Meta:
+        model = Book
+        fields = ("id", "title", "author", "category")
 
 
 class BookCategorySerializer(serializers.HyperlinkedModelSerializer):  # type: ignore
