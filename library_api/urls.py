@@ -4,10 +4,12 @@ from django.urls import include
 from django.urls import path
 from rest_framework.routers import DefaultRouter  # type: ignore
 
+from .views import AuthorViewSet
 from .views import BookCategoryViewSet
 
 
 router = DefaultRouter()
+router.register(r"authors", AuthorViewSet)
 router.register(r"categories", BookCategoryViewSet)
 
 

@@ -59,7 +59,7 @@ GitHubActions / Heroku Deployment - to consider
 | displaying all books writen by then given Autor     | [F]     | [NOT STARTED] |
 | editing previously added book item                  | [F]     | [IN PROGRESS] |
 | removing book item completely                       | [F]     | [IN PROGRESS] |
-| displaying all authors from the system              | [F]     | [NOT STARTED] |
+| displaying all authors from the system              | [F]     | [DONE]        |
 
 #
 #### Work progress, notes
