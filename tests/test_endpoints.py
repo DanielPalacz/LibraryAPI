@@ -88,6 +88,28 @@ def test_endpoints_get_single_category_with_parent(live_server):
     assert categories_data == ["Fantasy", "Required book"]
 
 
+def test_endpoints_post_categories_category_cant_be_own_parent(live_server):
+    url = f"{live_server.url}/" + "categories/"
+    data = {"name": "NewCategoryAuto"}
+
+    response = requests.post(url, data=data)
+    assert response.status_code == 200 or response.status_code == 201
+
+    response_data = response.json()
+    assert list(response_data.keys()) == ["id", "name", "parent"]
+    assert response_data["name"] == "NewCategoryAuto"
+    assert response_data["parent"] is None
+
+    new_category_url = url + str(response_data["id"]) + "/"
+
+    data_update = {"id": response_data["id"], "name": "NewCategoryAuto", "parent": new_category_url}
+
+    single_category_response = requests.put(new_category_url, data=data_update)
+    assert single_category_response.status_code == 400
+    assert single_category_response.reason == "Bad Request"
+    assert single_category_response.text == '{"non_field_errors":["The category can\'t be own parent."]}'
+
+
 def test_endpoints_update_fully_single_category(live_server):
     url = f"{live_server.url}/" + "categories/"
     response = requests.get(url)
