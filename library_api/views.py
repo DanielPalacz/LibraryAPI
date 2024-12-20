@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+from django.db.models import QuerySet
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets  # type: ignore
+from rest_framework.generics import ListAPIView  # type: ignore
 
 from .models import Author
 from .models import Book
@@ -15,6 +18,19 @@ from .serializers import BookSerializer
 class AuthorViewSet(viewsets.ModelViewSet):  # type: ignore
     queryset = Author.objects.all().order_by("last_name")
     serializer_class = AuthorSerializer
+
+
+@extend_schema(
+    tags=["Books"],
+    description="The given Author books.",
+    responses=BookSerializer(many=True),
+)
+class AuthorBooksView(ListAPIView):  # type: ignore
+    serializer_class = BookSerializer
+
+    def get_queryset(self) -> QuerySet:  # type: ignore
+        user_id = self.kwargs["pk"]
+        return Book.objects.filter(id=user_id)
 
 
 class BookViewSet(viewsets.ModelViewSet):  # type: ignore
