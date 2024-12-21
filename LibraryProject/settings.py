@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "library_api",
     "rest_framework",
     "drf_spectacular",
+    "register",
 ]
 
 MIDDLEWARE = [
@@ -148,10 +149,14 @@ else:
         ],
     }
 
-
 SPECTACULAR_SETTINGS = {
     "TITLE": "Library API",
     "DESCRIPTION": "Documentation for Library API",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,  # Hide documentation schema
 }
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/logged_out/"
+LOGIN_URL = "/login/"
+LOGOUT_URL = "/logout/"

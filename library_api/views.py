@@ -8,6 +8,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import serializers  # type: ignore
 from rest_framework import viewsets
 from rest_framework.generics import ListAPIView  # type: ignore
+from rest_framework.permissions import AllowAny  # type: ignore
 from rest_framework.response import Response  # type: ignore
 from rest_framework.views import APIView  # type: ignore
 
@@ -82,6 +83,8 @@ class CustomApiRootView(APIView):  # type: ignore
     """
     Custom DRF API root view listing available endpoints.
     """
+
+    permission_classes = [AllowAny]  # This turns off authentication
 
     # Define a dummy serializer
     class DummySerializer(serializers.Serializer):  # type: ignore

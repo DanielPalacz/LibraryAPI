@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+User logging out
+{% endblock %}
+
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+            <p>Logged as '{{request.user}}' user.</p>
+
+            <form method="post" action="{% url 'register:logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+    {% else %}
+
+<h1>Logged out</h1>
+<p>You have been successfully logged out. You can <a href="{% url 'register:login' %}">log-in again.</a>
+</p>
+{% endif %}
+
+
+{% endblock %}
