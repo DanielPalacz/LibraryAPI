@@ -11,7 +11,7 @@ Deliver API solution handling such cases:
 - editing previously added book item
 - removing book item completely
 
-Provide sufficient Authentication/Authorization.
+Provide sufficient Authentication/Authorization approach.
 Deliver decent, clear documentation.
 ```
 
@@ -88,7 +88,7 @@ USAGE:
 #### Testing / pytest with other supporting libs:
 ```
 SETUP STEPS:
- - installing: pytest, pytest-django, coverage
+ - installing: pytest, pytest-django, coverage, pytest-cov
  - preparing 'pytest.ini' file
  - creating fixture for dynamically creating Database setup
   --- adding specific 'test' settings.py file where sqlite3 is 'in memory' mode
@@ -113,7 +113,7 @@ DRF components:
 
 Thoughts:
  - DRF works bad with mypy, there is no specific stubs extension    [Minuse]
- - automates a lot, one can realy fast deliver complex api       [Posisitive]
+ - automates a lot, one can really fast deliver complex api       [Posisitive]
  - drf_spectacular, gives three type of documentation setup...   [Big posisitive]
 ```
 

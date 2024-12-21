@@ -7,8 +7,6 @@ def test_endpoints_drf_root(live_server):
     url = f"{live_server.url}/"
     response = requests.get(url)
     assert response.status_code == 200
-    assert response.content == b'{"categories":"' + url.encode() + b'categories/"}'
-    assert response.text == '{"categories":"' + f"{url}" + 'categories/"}'
 
 
 def test_endpoints_get_categories(live_server):

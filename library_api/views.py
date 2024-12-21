@@ -80,14 +80,14 @@ class CategoryBooksView(ListAPIView):  # type: ignore
 )
 class CustomApiRootView(APIView):  # type: ignore
     """
-    Custom API root view that lists available endpoints.
+    Custom DRF API root view listing available endpoints.
     """
 
     # Define a dummy serializer
     class DummySerializer(serializers.Serializer):  # type: ignore
         pass  # No fields, just a placeholder
 
-    # Explicitly tell DRF that this view has no serializer
+    # It is to satisfy some documentation relationships
     @staticmethod
     def get_serializer_class() -> Type[DummySerializer]:
         return CustomApiRootView.DummySerializer
