@@ -132,15 +132,22 @@ STATIC_ROOT = join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.SessionAuthentication'],
-    # 'DEFAULT_AUTHENTICATION_CLASSES':
-    # ['rest_framework.authentication.BasicAuthentication', 'rest_framework.authentication.SessionAuthentication'],
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
-    # "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",],
-}
+if getenv("FORCE_NO_AUTH") == "true":
+    REST_FRAMEWORK = {
+        "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+        "DEFAULT_AUTHENTICATION_CLASSES": [],
+        # 'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.BasicAuthentication']
+        "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
+    }
+else:
+    REST_FRAMEWORK = {
+        "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+        "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework.authentication.SessionAuthentication"],
+        "DEFAULT_PERMISSION_CLASSES": [
+            "rest_framework.permissions.IsAuthenticated",
+        ],
+    }
+
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Library API",

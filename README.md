@@ -169,7 +169,7 @@ What was needed?
     d) OAuth2/OpenID Connect
 
 2. Authorization
-    a) Permissions in DRF
+    a) DRF builtin permission classes (AllowAny, IsAuthenticated, IsAdminUser, DjangoModelPermissions)
     b) Django's login_required Decorator
     c) Role-Based Access Control (RBAC)
 ```
