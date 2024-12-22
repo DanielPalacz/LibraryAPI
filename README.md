@@ -1,5 +1,22 @@
 # LibraryAPI
 
+
+# SETUP STEPS:
+```
+1
+2
+3
+4
+```
+
+
+# USAGE:
+```
+1)
+
+```
+
+
 ### Library API system 'business logic' requirements:
 ```
 Deliver API solution handling such cases:
@@ -14,6 +31,9 @@ Deliver API solution handling such cases:
 Provide sufficient Authentication/Authorization approach.
 Deliver decent, clear documentation.
 ```
+
+
+# NOTES
 
 # Work progress
 
@@ -164,12 +184,41 @@ What was needed?
 ```
 1. Authentication
     a) BasicAuthentication, password-based Authentication
-    b) Login-Based Authentication (Session)
-    c) Token-Based Authentication
+    b) Login-Based Authentication (SessionAuthentication)
+    c) Token-Based Authentication (JWT token authorization)
     d) OAuth2/OpenID Connect
 
 2. Authorization
     a) DRF builtin permission classes (AllowAny, IsAuthenticated, IsAdminUser, DjangoModelPermissions)
     b) Django's login_required Decorator
     c) Role-Based Access Control (RBAC)
+```
+
+
+## Authentication and Authorization in Django/DRF - APPROACH_1
+- Authentication: SessionAuthentication (setup via settings.py)
+- Authorization: IsAuthenticated (setup via settings.py)
+- two endpoints have override Authorization mode to AllowAny (/, login/)
+```
+1. Swagger
+ - use login endpoint to load sessionid cookie into browser session
+ - restart browser page (to update for example csrftoken)
+ - execute requests you need
+
+
+2. curl requests
+
+2a)
+    Login via 'login/' endpoint and store cookies to temp 'cookie.txt' file:
+    curl -X POST http://127.0.0.1:8000/login/ -H "Content-Type: application/json" -d '{"username": USERNAME, "password": PASSWORD}' -c cookies.txt
+
+2b)
+    cat cookies.txt # copy csrftoken, it is needed for POST-like requests
+
+2c)
+    curl -X GET http://127.0.0.1:8000/authors/ -b cookies.txt
+    curl -X POST -d '{"first_name": "Adam", "last_name": "Mickiewicz", "year_of_birth_date": 1798}' http://127.0.0.1:8000/authors/ -b cookies.txt -H "Content-Type: application/json" -H "X-CSRFToken: <CSRF_TOKEN_VALUE>"
+
+2d)
+    curl -X POST http://127.0.0.1:8000/logout/ -b cookies.txt -H "Content-Type: application/json" -H "X-CSRFToken: <CSRF_TOKEN_VALUE>"
 ```

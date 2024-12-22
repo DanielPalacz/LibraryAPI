@@ -3,6 +3,6 @@ from __future__ import annotations
 from django.apps import AppConfig
 
 
-class RegisterConfig(AppConfig):
+class LoginApiConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "register"
+    name = "login_api"

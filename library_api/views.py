@@ -99,6 +99,7 @@ class CustomApiRootView(APIView):  # type: ignore
     def get(request, *args, **kwargs):  # type: ignore
         return Response(
             {
+                "drf-root": "/",
                 "authors": "/authors/",
                 "books": "/books/",
                 "categories": "/categories/",

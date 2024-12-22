@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "library_api",
     "rest_framework",
     "drf_spectacular",
-    "register",
+    "login_api",
 ]
 
 MIDDLEWARE = [
@@ -156,7 +156,6 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,  # Hide documentation schema
 }
 
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/logged_out/"
-LOGIN_URL = "/login/"
-LOGOUT_URL = "/logout/"
+SESSION_COOKIE_DOMAIN = "127.0.0.1"
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+CSRF_COOKIE_SECURE = False  # False for development, True for production
