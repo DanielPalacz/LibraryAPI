@@ -19,6 +19,10 @@ class MessageResponseSerializer(serializers.Serializer):  # type: ignore
     message = serializers.CharField()
 
 
+class TokenResponseSerializer(serializers.Serializer):  # type: ignore
+    token = serializers.CharField()
+
+
 class ErrorResponseSerializer(serializers.Serializer):  # type: ignore
     error = serializers.CharField()
 

@@ -196,13 +196,17 @@ What was needed?
 
 ```
 
-## Authentication and Authorization in Django/DRF (Typical Approaches)
+---
+---
+
+## Authentication and Authorization in Django/DRF
 ```
 1. Authentication
     a) BasicAuthentication, password-based Authentication
     b) Login-Based Authentication (SessionAuthentication)
-    c) Token-Based Authentication (JWT token authorization)
-    d) OAuth2/OpenID Connect
+    c) Token-Based Authentication (Simple version from DRF: TokenAuthentication)
+    d) Token-Based Authentication (JWT token authorization)
+    e) OAuth2/OpenID Connect
 
 2. Authorization
     a) DRF builtin permission classes (AllowAny, IsAuthenticated, IsAdminUser, DjangoModelPermissions)
@@ -232,4 +236,25 @@ What was needed?
     curl -X POST -d '{"first_name": "Adam", "last_name": "Mickiewicz", "year_of_birth_date": 1798}' http://127.0.0.1:8000/authors/ -b cookies.txt -H "Content-Type: application/json" -H "X-CSRFToken: <CSRF_TOKEN_VALUE>"
 2d)
     curl -X POST http://127.0.0.1:8000/logout/ -b cookies.txt -H "Content-Type: application/json" -H "X-CSRFToken: <CSRF_TOKEN_VALUE>"
+```
+
+## Authentication and Authorization in Django/DRF - APPROACH_2
+- Authentication: TokenAuthentication (setup via settings.py)
+- Authorization: IsAuthenticated (setup via settings.py)
+- two endpoints have override Authorization mode to AllowAny (/, login/)
+```
+- adding 'rest_framework.authtoken' to INSTALLED_APPS
+- python manage.py migrate
+- update settings.DEFAULT_AUTHENTICATION_CLASSES
+
+1)
+ - use login endpoint to get token value and load into Swagger or prepare curl requests
+ - use logout endpoint for token deactivation
+2)
+curl request example:
+
+curl -X 'GET' \
+  'http://127.0.0.1:8000/authors/' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Token 9105517aa58df364a5b9f9eeab978e34b07739da'
 ```

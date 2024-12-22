@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 from django.contrib.auth import authenticate
-from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.views import LogoutView
 from django.core.exceptions import ValidationError
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import OpenApiResponse
 from rest_framework import status  # type: ignore
 from rest_framework import viewsets
+from rest_framework.authentication import get_authorization_header  # type: ignore
+from rest_framework.authtoken.models import Token  # type: ignore
 from rest_framework.permissions import AllowAny  # type: ignore
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response  # type: ignore
@@ -19,6 +19,7 @@ from login_api.serializers import ErrorDetailResponseSerializer
 from login_api.serializers import ErrorResponseSerializer
 from login_api.serializers import LoginSerializer
 from login_api.serializers import MessageResponseSerializer
+from login_api.serializers import TokenResponseSerializer
 from login_api.serializers import UserSerializer
 
 
@@ -71,24 +72,27 @@ class RegisterView(APIView):  # type: ignore
     request=None,  # This tells drf_spectacular there is no request body (since it’s a simple POST)
 )
 class CustomLogoutView(APIView):  # type: ignore
-    """
-    This is a custom DRF API view to log out users and invalidate the session.
-    """
-
     permission_classes = [IsAuthenticated]
 
     @staticmethod
     def post(request, *args, **kwargs):  # type: ignore
         """
-        Call Django's default LogoutView to handle logout functionality.
+        Call Django for Authentication Token deactivation.
         """
+        # Extract the token from the Authorization header
+        auth_header = get_authorization_header(request).decode("utf-8")  # Get the Authorization header
+        if auth_header.startswith("Token "):  # Ensure it's a token
+            token_key = auth_header.split("Token ")[1]  # Extract the token value
+        else:
+            return Response({"error": "Invalid token format"}, status=400)
 
-        # Call the LogoutView functionality
-        logout_view = LogoutView.as_view()
-        logout_view(request)
-
-        # Return a custom response
-        return Response({"message": "Logout successful"}, status=200)
+        # Find the token in the database and delete it
+        try:
+            token = Token.objects.get(key=token_key)
+            token.delete()
+            return Response({"message": "Logout successful (Token deactivated)."}, status=200)
+        except Token.DoesNotExist:
+            return Response({"error": "Invalid token"}, status=400)
 
 
 @extend_schema(
@@ -98,7 +102,7 @@ class CustomLogoutView(APIView):  # type: ignore
     tags=["User Management"],
     request=LoginSerializer,  # Directly associate the serializer with the request body
     responses={
-        200: MessageResponseSerializer,  # Use the SuccessResponseSerializer for 200 response
+        200: TokenResponseSerializer,  # Use the TokenResponseSerializer for 200 response
         400: ErrorResponseSerializer,  # Use the ErrorResponseSerializer for 400 response
     },
 )
@@ -121,11 +125,10 @@ class CustomLoginView(APIView):  # type: ignore
             user = authenticate(username=username, password=password)
 
             if user is not None:
-                # Log the user in (establish a session)
-                login(request, user)
-
-                # Return a successful response
-                return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+                token, created = Token.objects.get_or_create(user=user)
+                # Return a token response
+                token_value = "Token " + token.key
+                return Response({"token": token_value}, status=status.HTTP_200_OK)
             else:
                 # Return an error response if authentication fails
                 return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
