@@ -1,23 +1,33 @@
 # LibraryAPI
 
 
-# SETUP STEPS:
+### SETUP STEPS:
 ```
-1
-2
-3
-4
+git clone git@github.com:DanielPalacz/LibraryAPI.git
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+
+Populate minimum of examples to DB:
+PYTHONPATH=. python tests/populate_db.py
+
 ```
 
 
-# USAGE:
+### USAGE:
 ```
-1)
-
+python manage.py runserver
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/api/schema/swagger-ui/
+http://127.0.0.1:8000/api/redoc/
 ```
 
 
-### Library API system 'business logic' requirements:
+### Business logic / requirements:
 ```
 Deliver API solution handling such cases:
 - adding book item to specific category in the system
@@ -32,33 +42,34 @@ Provide sufficient Authentication/Authorization approach.
 Deliver decent, clear documentation.
 ```
 
+---
 
-# NOTES
+## DIFFERENT PROJECT NOTES
 
-# Work progress
+### NOTES / WORK TRACKER
 
-| Item                                                  | Comment | Status        |
-|-------------------------------------------------------|---------|---------------|
-| Django/DRF initial project setup                      | -       | [DONE]        |
-| shell plus setup                                      | -       | [DONE]        |
-| precommit/mypy  setup                                 | -       | [DONE]        |
-| Models creation                                       | -       | [DONE]        |
-| Auto-generating diagram class                         | -       | [DONE]        |
-| DRF Serializers (errors, validations)                 | -       | [DONE]        |
-| Views, builtin DRF views                              | -       | [DONE]        |
-| DRF Routers                                           | -       | [DONE]        |
-| coverage package for test coverage metrics            | -       | [DONE]        |
-| drf_spectacular package integration (Swagger, Redoc)  | -       | [DONE]        |
-| displaying all categories from the system             | [F]     | [DONE]        |
-| adding book item to specific category in the system   | [F]     | [DONE]        |
-| displaying all books from the given category          | [F]     | [DONE]        |
-| displaying all books writen by then given Author      | [F]     | [DONE]        |
-| editing previously added book item                    | [F]     | [DONE]        |
-| removing book item completely                         | [F]     | [DONE]        |
-| displaying all authors from the system                | [F]     | [DONE]        |
-| Automation Testing / Playing with pytest-django       | -       | [DONE]        |
-| Automation Testing (test coverage for Authentication) | -       | [NOT STARTED] |
-| Manual testing (curl)                                 | -       | [DONE]        |
+| Item                                                  | Comment  | Status        |
+|-------------------------------------------------------|----------|---------------|
+| Django/DRF initial project setup                      | setup    | [DONE]        |
+| shell plus setup                                      | setup    | [DONE]        |
+| precommit/mypy  setup                                 | learning | [DONE]        |
+| Models creation                                       | setup    | [DONE]        |
+| Auto-generating diagram class                         | learning | [DONE]        |
+| DRF Serializers (errors, validations)                 | learning | [DONE]        |
+| Views, builtin DRF views                              | learning | [DONE]        |
+| DRF Routers                                           | learning | [DONE]        |
+| coverage package for test coverage metrics            | testing  | [DONE]        |
+| drf_spectacular package integration (Swagger, Redoc)  | setup    | [DONE]        |
+| displaying all categories from the system             | feature  | [DONE]        |
+| adding book item to specific category in the system   | feature  | [DONE]        |
+| displaying all books from the given category          | feature  | [DONE]        |
+| displaying all books writen by then given Author      | feature  | [DONE]        |
+| editing previously added book item                    | feature  | [DONE]        |
+| removing book item completely                         | feature  | [DONE]        |
+| displaying all authors from the system                | feature  | [DONE]        |
+| Automation Testing / Playing with pytest-django       | testing  | [DONE]        |
+| Automation Testing (test coverage for Authentication) | testing  | [NOT STARTED] |
+| Manual testing (curl)                                 | testing  | [DONE]        |
 
 
 #### Django Shell Plus setup
@@ -127,7 +138,7 @@ Run tests without Authentication-Authorization features:
 ```
 
 
-# DRF notes
+#### Django Rest Framework notes
 
 ```
 DRF components:
@@ -210,20 +221,15 @@ What was needed?
  - restart browser page (to update for example csrftoken)
  - execute requests you need
 
-
 2. curl requests
-
 2a)
     Login via 'login/' endpoint and store cookies to temp 'cookie.txt' file:
     curl -X POST http://127.0.0.1:8000/login/ -H "Content-Type: application/json" -d '{"username": USERNAME, "password": PASSWORD}' -c cookies.txt
-
 2b)
     cat cookies.txt # copy csrftoken, it is needed for POST-like requests
-
 2c)
     curl -X GET http://127.0.0.1:8000/authors/ -b cookies.txt
     curl -X POST -d '{"first_name": "Adam", "last_name": "Mickiewicz", "year_of_birth_date": 1798}' http://127.0.0.1:8000/authors/ -b cookies.txt -H "Content-Type: application/json" -H "X-CSRFToken: <CSRF_TOKEN_VALUE>"
-
 2d)
     curl -X POST http://127.0.0.1:8000/logout/ -b cookies.txt -H "Content-Type: application/json" -H "X-CSRFToken: <CSRF_TOKEN_VALUE>"
 ```

@@ -103,6 +103,7 @@ class CustomApiRootView(APIView):  # type: ignore
                 "authors": "/authors/",
                 "books": "/books/",
                 "categories": "/categories/",
+                "users": "/users/",
                 "author-books": "/author/<int:pk>/books/",  # Custom endpoint added
                 "category-books": "/category/<int:pk>/books/",  # Custom endpoint added
                 "schema": "/api/schema/",
