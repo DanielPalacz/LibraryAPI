@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers  # type: ignore
 
 
-class UserRegistrationSerializer(serializers.ModelSerializer):  # type: ignore
+class UserSerializer(serializers.ModelSerializer):  # type: ignore
     class Meta:
         model = User
         fields = ("username", "email", "password")

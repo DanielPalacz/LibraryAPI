@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import OpenApiResponse
 from rest_framework import status  # type: ignore
+from rest_framework import viewsets
 from rest_framework.permissions import AllowAny  # type: ignore
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response  # type: ignore
@@ -18,12 +19,12 @@ from login_api.serializers import ErrorDetailResponseSerializer
 from login_api.serializers import ErrorResponseSerializer
 from login_api.serializers import LoginSerializer
 from login_api.serializers import MessageResponseSerializer
-from login_api.serializers import UserRegistrationSerializer
+from login_api.serializers import UserSerializer
 
 
 class RegisterView(APIView):  # type: ignore
 
-    serializer_class = UserRegistrationSerializer
+    serializer_class = UserSerializer
     permission_classes = [AllowAny]  # This turns off authentication
 
     @extend_schema(
@@ -131,3 +132,11 @@ class CustomLoginView(APIView):  # type: ignore
         else:
             # Return an error if the serializer is invalid
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@extend_schema(
+    tags=["Users"],
+)
+class UserViewSet(viewsets.ModelViewSet):  # type: ignore
+    queryset = User.objects.all().order_by("username")
+    serializer_class = UserSerializer
