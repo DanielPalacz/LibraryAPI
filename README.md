@@ -37,28 +37,28 @@ Deliver decent, clear documentation.
 
 # Work progress
 
-| Item                                                 | Comment | Status        |
-|------------------------------------------------------|---------|---------------|
-| Django/DRF initial project setup                     | -       | [DONE]        |
-| shell plus setup                                     | -       | [DONE]        |
-| precommit/mypy  setup                                | -       | [DONE]        |
-| Models creation                                      | -       | [DONE]        |
-| Auto-generating diagram class                        | -       | [DONE]        |
-| Automation Testing / Playing with pytest-django      | -       | [IN PROGRESS] |
-| DRF Serializers (errors, validations)                | -       | [DONE]        |
-| Views, builtin DRF views                             | -       | [DONE]        |
-| DRF Routers                                          | -       | [DONE]        |
-| Manual testing (curl, Postman)                       | -       | [IN PROGRESS] |
-| coverage package for test coverage metrics           | -       | [DONE]        |
-| drf_spectacular package integration (Swagger, Redoc) | -       | [DONE]        |
-| displaying all categories from the system            | [F]     | [DONE]        |
-| adding book item to specific category in the system  | [F]     | [DONE]        |
-| displaying all books from the given category         | [F]     | [DONE]        |
-| displaying all books writen by then given Author     | [F]     | [DONE]        |
-| editing previously added book item                   | [F]     | [DONE]        |
-| removing book item completely                        | [F]     | [DONE]        |
-| displaying all authors from the system               | [F]     | [DONE]        |
-
+| Item                                                  | Comment | Status        |
+|-------------------------------------------------------|---------|---------------|
+| Django/DRF initial project setup                      | -       | [DONE]        |
+| shell plus setup                                      | -       | [DONE]        |
+| precommit/mypy  setup                                 | -       | [DONE]        |
+| Models creation                                       | -       | [DONE]        |
+| Auto-generating diagram class                         | -       | [DONE]        |
+| DRF Serializers (errors, validations)                 | -       | [DONE]        |
+| Views, builtin DRF views                              | -       | [DONE]        |
+| DRF Routers                                           | -       | [DONE]        |
+| coverage package for test coverage metrics            | -       | [DONE]        |
+| drf_spectacular package integration (Swagger, Redoc)  | -       | [DONE]        |
+| displaying all categories from the system             | [F]     | [DONE]        |
+| adding book item to specific category in the system   | [F]     | [DONE]        |
+| displaying all books from the given category          | [F]     | [DONE]        |
+| displaying all books writen by then given Author      | [F]     | [DONE]        |
+| editing previously added book item                    | [F]     | [DONE]        |
+| removing book item completely                         | [F]     | [DONE]        |
+| displaying all authors from the system                | [F]     | [DONE]        |
+| Automation Testing / Playing with pytest-django       | -       | [DONE]        |
+| Automation Testing (test coverage for Authentication) | -       | [NOT STARTED] |
+| Manual testing (curl)                                 | -       | [DONE]        |
 
 
 #### Django Shell Plus setup
@@ -119,6 +119,11 @@ USAGE:
 - PYTHONPATH=. pytest -vv tests/
 - PYTHONPATH=. pytest -s -vv tests/
 - PYTHONPATH=. pytest -vv --cov-report=html:TestCoverageReport tests/
+
+Run tests without Authentication-Authorization features:
+- DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/
+- and/or setup specific environment variables
 ```
 
 
