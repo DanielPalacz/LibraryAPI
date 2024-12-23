@@ -1,29 +1,74 @@
 # LibraryAPI
 
+### Developed API project focuses mostly on exploring Django / DRF capabilities.
+ - however there were other than Django / DRF reviewed, especially in terms of dev env and testing
+```
+Project was developed as below:
+
+Phase 1. Developing CRUD functions in Django / DRF
+ - mixing Models, Serializers, builtin DRF Class-based views, Routers
+ - and following typical DRF setup ended creating a few CRUD apis really fast
+ - from testing pov there was pytest-django lib explored
+ - apart of that quite complex dev env was used with: precommit, mypy (doesnt work well with DRF), shell_plus and even tools for class diagram generation (based on Django models)
+
+Phase 2. Integration of drf-spectacular, looking into documentation options
+ - as per documentation drf-spectacular integration provided powerful than satisfied solution giving three types of documentation
+ - JSON OpenAPI Schema (raw JSON OpenAPI), Swagger, ReDoc,
+
+Phase 3. Exploring different Authentication options
+ - three ways of User Authentication were implemented / reviewed
+ - SessionAuthentication -> TokenAuthentication -> JWTAuthentication
+ - SessionAuthentication-branch and TokenAuthentication-branch are backuped branches for those previous solutions
+ - JWTAuthentication is final solution (GET token/ request should be used for token fetching)
+ - in terms of Authorization in this stage there is basic IsAuthenticated mode setuped via settings.py
+
+Phase 4. Exploring Authorization area
+ - setupping some endpoints to Admin available only
+ - checking posiible options in terms of builtin Permission mechanisms
+ - considering implementing some RBAC solution
+
+Phase 5. Exploring/integrating default DRF Filtering / Sorting / Pagination capabilities
+
+Phase 6. Implementing custom Exception handler in DRF
+
+Phase 7. Exploring writing custom Middleware w Django/DRF
+```
+
+
 
 ### SETUP STEPS:
 ```
-git clone git@github.com:DanielPalacz/LibraryAPI.git
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
+Initial project setup:
+ - git clone git@github.com:DanielPalacz/LibraryAPI.git
+ - python -m venv venv
+ - source venv/bin/activate
+ - pip install -r requirements.txt
+ - python manage.py makemigrations
+ - python manage.py migrate
+ - python manage.py createsuperuser
 
 Populate minimum of examples to DB:
-PYTHONPATH=. python tests/populate_db.py
+ - PYTHONPATH=. python tests/populate_db.py
 
+Setup statics / api schema:
+ - python manage.py collectstatic
+ - python manage.py spectacular --file schema.yml
+
+For now API is not available publicly.
+ - python manage.py runserver
 ```
 
 
 ### USAGE:
 ```
-python manage.py runserver
-http://127.0.0.1:8000/
-http://127.0.0.1:8000/api/schema/swagger-ui/
-http://127.0.0.1:8000/api/redoc/
+Documentation enpoints:
+ - http://127.0.0.1:8000/
+ - http://127.0.0.1:8000/api/schema/
+ - http://127.0.0.1:8000/api/schema/swagger-ui/
+ - http://127.0.0.1:8000/api/redoc/
+
+For start play with Swagg
+
 ```
 
 
