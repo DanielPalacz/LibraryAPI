@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 from __future__ import annotations
 
+from datetime import timedelta
 from os import getenv
 from os.path import join
 from pathlib import Path
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     "django_extensions",
     "library_api",
     "rest_framework",
-    "rest_framework.authtoken",
+    # "rest_framework.authtoken",
+    "rest_framework_simplejwt",
     "drf_spectacular",
     "login_api",
 ]
@@ -144,11 +146,22 @@ if getenv("FORCE_NO_AUTH") == "true":
 else:
     REST_FRAMEWORK = {
         "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-        "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework.authentication.TokenAuthentication"],
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+            "rest_framework_simplejwt.authentication.JWTAuthentication",
+        ],
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticated",
         ],
     }
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,
+}
+
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Library API",

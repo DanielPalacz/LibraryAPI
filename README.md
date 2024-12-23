@@ -46,7 +46,7 @@ Deliver decent, clear documentation.
 
 ## DIFFERENT PROJECT NOTES
 
-### NOTES / WORK TRACKER
+### NOTES / WORK TRACKER TABLE
 
 | Item                                                  | Comment  | Status        |
 |-------------------------------------------------------|----------|---------------|
@@ -68,8 +68,9 @@ Deliver decent, clear documentation.
 | removing book item completely                         | feature  | [DONE]        |
 | displaying all authors from the system                | feature  | [DONE]        |
 | Automation Testing / Playing with pytest-django       | testing  | [DONE]        |
+| integrating different Authentication approaches       | feature  | [NOT STARTED] |
 | Automation Testing (test coverage for Authentication) | testing  | [NOT STARTED] |
-| Manual testing (curl)                                 | testing  | [DONE]        |
+| Manual testing (curl, Postman)                        | testing  | [IN PROGRESS] |
 
 
 #### Django Shell Plus setup
@@ -134,7 +135,6 @@ USAGE:
 Run tests without Authentication-Authorization features:
 - DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/
 - FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/
-- and/or setup specific environment variables
 ```
 
 
@@ -215,7 +215,7 @@ What was needed?
 ```
 
 
-## Authentication and Authorization in Django/DRF - APPROACH_1
+### Authentication/Authorization in Django/DRF - APPROACH 1
 - Authentication: SessionAuthentication (setup via settings.py)
 - Authorization: IsAuthenticated (setup via settings.py)
 - two endpoints have override Authorization mode to AllowAny (/, login/)
@@ -238,7 +238,7 @@ What was needed?
     curl -X POST http://127.0.0.1:8000/logout/ -b cookies.txt -H "Content-Type: application/json" -H "X-CSRFToken: <CSRF_TOKEN_VALUE>"
 ```
 
-## Authentication and Authorization in Django/DRF - APPROACH_2
+### Authentication/Authorization in Django/DRF - APPROACH 2
 - Authentication: TokenAuthentication (setup via settings.py)
 - Authorization: IsAuthenticated (setup via settings.py)
 - two endpoints have override Authorization mode to AllowAny (/, login/)
@@ -257,4 +257,24 @@ curl -X 'GET' \
   'http://127.0.0.1:8000/authors/' \
   -H 'accept: application/json' \
   -H 'Authorization: Token 9105517aa58df364a5b9f9eeab978e34b07739da'
+```
+
+### Authentication/Authorization in Django/DRF - APPROACH 3
+- Authentication: JWTAuthentication (setup via settings.py)
+- Authorization: IsAuthenticated (setup via settings.py)
+- one endpoint has override Authorization mode to AllowAny (/)
+```
+- pip install djangorestframework-simplejwt
+- adding 'rest_framework_simplejwt' to INSTALLED_APPS
+- update settings.DEFAULT_AUTHENTICATION_CLASSES
+
+1)
+ - use token/ and token/refresh/ endpoints to fetch token data
+2)
+curl request example:
+
+curl -X 'GET' \
+  'http://127.0.0.1:8000/books/' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer BEARER_TOKEN'
 ```
