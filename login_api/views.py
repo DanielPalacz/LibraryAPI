@@ -8,6 +8,7 @@ from drf_spectacular.utils import OpenApiResponse
 from rest_framework import status  # type: ignore
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny  # type: ignore
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response  # type: ignore
 from rest_framework.views import APIView  # type: ignore
 
@@ -146,3 +147,5 @@ class RegisterView(APIView):  # type: ignore
 class UserViewSet(viewsets.ModelViewSet):  # type: ignore
     queryset = User.objects.all().order_by("username")
     serializer_class = UserSerializer
+
+    permission_classes = [IsAdminUser]  # This turns off authentication

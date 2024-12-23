@@ -113,9 +113,10 @@ Deliver decent, clear documentation.
 | removing book item completely                         | feature  | [DONE]        |
 | displaying all authors from the system                | feature  | [DONE]        |
 | Automation Testing / Playing with pytest-django       | testing  | [DONE]        |
-| integrating different Authentication approaches       | feature  | [NOT STARTED] |
+| integrating different Authentication approaches       | feature  | [DONE]        |
 | Automation Testing (test coverage for Authentication) | testing  | [NOT STARTED] |
 | Manual testing (curl, Postman)                        | testing  | [IN PROGRESS] |
+| exploring builtin Permission mechanisms               | testing  | [IN PROGRESS] |
 
 
 #### Django Shell Plus setup
