@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-from django.contrib.auth.models import User
 from rest_framework import serializers  # type: ignore
 
+from .models import ExtendedUser
 
-class UserSerializer(serializers.ModelSerializer):  # type: ignore
+
+class ExtendedUserSerializer(serializers.ModelSerializer):  # type: ignore
     class Meta:
-        model = User
-        fields = ("username", "email", "password")
+        model = ExtendedUser
+        fields = ("username", "email", "password", "is_employee")
 
 
 class LoginSerializer(serializers.Serializer):  # type: ignore

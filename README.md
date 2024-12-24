@@ -116,7 +116,7 @@ Deliver decent, clear documentation.
 | integrating different Authentication approaches       | feature  | [DONE]        |
 | Automation Testing (test coverage for Authentication) | testing  | [NOT STARTED] |
 | Manual testing (curl, Postman)                        | testing  | [IN PROGRESS] |
-| exploring builtin Permission mechanisms               | testing  | [IN PROGRESS] |
+| exploring builtin Permission mechanisms               | testing  | [DONE]        |
 
 
 #### Django Shell Plus setup
@@ -231,12 +231,11 @@ What was needed?
  - checking routers potential, if it's worth using (checking default documentation that is created)
  - checking other option for API documentation (like  Swagger from drf-yasg)
  - automation testing - finding good approach for fixturing Web server handling all app
-
-
-[NOT DONE]
  - checking Django authorization/authentication builtins (views, login_required decorator)
  - checking JWT tokens (djangorestframework-simplejwt)
  - checking how to implement different roles in Django, is there something like Custom Permissions?
+
+[NOT DONE]
  - manual testing - playing with Postman
  - GitHubActions / Heroku Deployment - to consider
 
@@ -255,11 +254,13 @@ What was needed?
     e) OAuth2/OpenID Connect
 
 2. Authorization
-    a) DRF builtin permission classes (AllowAny, IsAuthenticated, IsAdminUser, DjangoModelPermissions)
-    b) Django's login_required Decorator
-    c) Role-Based Access Control (RBAC)
+    a) Django's login_required Decorator (dedicated for Session-based typical Frontend Web APP, no good for APIs)
+    b) DRF builtin permission classes (AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly)
+    c) DjangoModelPermissions
+    d) DjangoObjectPermissions (extends DjangoModelPermissions, additional lib needed like: django-guardian)
+    e) Customized Role-Based Access Control (RBAC) solution
 ```
-
+ - [More details about Authorization (Permission Mechanisms in Django and DRF)](./README_AUTHORIZATION_MECHANISMS.md)
 
 ### Authentication/Authorization in Django/DRF - APPROACH 1
 - Authentication: SessionAuthentication (setup via settings.py)
@@ -323,4 +324,18 @@ curl -X 'GET' \
   'http://127.0.0.1:8000/books/' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer BEARER_TOKEN'
+```
+
+
+### Authentication/Authorization in Django/DRF - APPROACH 4
+- Authentication: JWTAuthentication (setup via settings.py)
+- Authorization: IsAuthenticated (setup via settings.py)
+  * users/ endpoints have manually assigned builtin IsAdminUser Permission rule
+  * register/ endpoint has manually assigned custom IsEmployee Permission rule (based on BasePermission class)
+  * one endpoint has override Authorization mode to AllowAny (/)
+```
+For now it is enough. There is many options in terms of Authorization (Permission) support in Django / DRF.
+There is quite many builtin / around-builtin solution in terms of Authorization (in Django/DRF)
+But next to consider would be  related to Django builtin Permission system: DjangoModelPermissions and later DjangoObjectPermissions.
+Both are more suitable for typical Frontend/Backend application when APIs will be often less demanding for Authorization systems. Worth to know that DjangoModelPermissions is really fast in terms of Development.
 ```
