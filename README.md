@@ -22,10 +22,10 @@ Phase 3. Exploring different Authentication options
  - JWTAuthentication is final solution (GET token/ request should be used for token fetching)
  - in terms of Authorization in this stage there is basic IsAuthenticated mode setuped via settings.py
 
-Phase 4. Exploring Authorization area
- - setupping some endpoints to Admin available only
- - checking posiible options in terms of builtin Permission mechanisms
- - considering implementing some RBAC solution
+Phase 4. Exploring Authorization approaches
+ - setuping some endpoints to be Admin available only
+ - using custom Permission rule based on BasePermission class
+ - understanding other options in terms of Authorizations (mainly DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly)
 
 Phase 5. Exploring/integrating default DRF Filtering / Sorting / Pagination capabilities
 
