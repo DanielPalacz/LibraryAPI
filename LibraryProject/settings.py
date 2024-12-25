@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "library_api.middleware.AddApiVersionMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -152,6 +153,10 @@ else:
             "rest_framework.permissions.IsAuthenticated",
         ],
         # "EXCEPTION_HANDLER": "library_api.exceptions.custom_exception_handler",  # Custom Exception handler
+        # "DEFAULT_RENDERER_CLASSES": [
+        # "library_api.middleware.CustomJSONRenderer",
+        # "rest_framework.renderers.BrowsableAPIRenderer",  # Keep the Browsable API renderer
+        # ],
     }
 
 

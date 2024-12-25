@@ -12,7 +12,7 @@ Phase 1. Developing CRUD functions in Django / DRF
  - apart of that quite complex dev env was used with: precommit, mypy (doesnt work well with DRF), shell_plus and even tools for class diagram generation (based on Django models)
 
 Phase 2. Integration of drf-spectacular, looking into documentation options
- - as per documentation drf-spectacular integration provided powerful than satisfied solution giving three types of documentation
+ - as per documentation drf-spectacular integration provided more than satisfied solution giving three types of documentation
  - JSON OpenAPI Schema (raw JSON OpenAPI), Swagger, ReDoc,
 
 Phase 3. Exploring different Authentication options
@@ -31,12 +31,14 @@ Phase 5. Exploring/integrating default DRF Filtering / Sorting / Pagination capa
  - it was amazingly small task to setup Filtering and Pagination to books/ endpoints
  - the same is about sorting (omitted), but it was done with queryset definition
 
-Phase 6. Implementing custom Exception handler in DRF
- - written here: 'library_api.exceptions.custom_exception_handler' (however turned off: settings.py)
-
-Phase 7. Exploring writing custom Middleware w Django/DRF
+Phase 6. Implementing other custom Django/DRF components
+ - Custom Exception handler:
+   written here: 'library_api.exceptions.custom_exception_handler' (however turned off: settings.py)
+ - Custom Middleware w Django/DRF:
+   solution written for adding header dynamically from custom middleware
+ - Custom Json Renderer:
+   written here: 'library_api.middleware.CustomJSONRenderer' (however turned off: settings.py)
 ```
-
 
 
 ### SETUP STEPS:
@@ -96,30 +98,30 @@ Deliver decent, clear documentation.
 
 ### NOTES / WORK TRACKER TABLE
 
-| Item                                                  | Comment  | Status        |
-|-------------------------------------------------------|----------|---------------|
-| Django/DRF initial project setup                      | setup    | [DONE]        |
-| shell plus setup                                      | setup    | [DONE]        |
-| precommit/mypy  setup                                 | learning | [DONE]        |
-| Models creation                                       | setup    | [DONE]        |
-| Auto-generating diagram class                         | learning | [DONE]        |
-| DRF Serializers (errors, validations)                 | learning | [DONE]        |
-| Views, builtin DRF views                              | learning | [DONE]        |
-| DRF Routers                                           | learning | [DONE]        |
-| coverage package for test coverage metrics            | testing  | [DONE]        |
-| drf_spectacular package integration (Swagger, Redoc)  | setup    | [DONE]        |
-| displaying all categories from the system             | feature  | [DONE]        |
-| adding book item to specific category in the system   | feature  | [DONE]        |
-| displaying all books from the given category          | feature  | [DONE]        |
-| displaying all books writen by then given Author      | feature  | [DONE]        |
-| editing previously added book item                    | feature  | [DONE]        |
-| removing book item completely                         | feature  | [DONE]        |
-| displaying all authors from the system                | feature  | [DONE]        |
-| Automation Testing / Playing with pytest-django       | testing  | [DONE]        |
-| integrating different Authentication approaches       | feature  | [DONE]        |
-| Automation Testing (test coverage for Authentication) | testing  | [DONE]        |
-| Manual testing (curl, Postman)                        | testing  | [IN PROGRESS] |
-| exploring builtin Permission mechanisms               | testing  | [DONE]        |
+| Item                                                  | Comment  | Status |
+|-------------------------------------------------------|----------|--------|
+| Django/DRF initial project setup                      | setup    | [DONE] |
+| shell plus setup                                      | setup    | [DONE] |
+| precommit/mypy  setup                                 | learning | [DONE] |
+| Models creation                                       | setup    | [DONE] |
+| Auto-generating diagram class                         | learning | [DONE] |
+| DRF Serializers (errors, validations)                 | learning | [DONE] |
+| Views, builtin DRF views                              | learning | [DONE] |
+| DRF Routers                                           | learning | [DONE] |
+| coverage package for test coverage metrics            | testing  | [DONE] |
+| drf_spectacular package integration (Swagger, Redoc)  | setup    | [DONE] |
+| displaying all categories from the system             | feature  | [DONE] |
+| adding book item to specific category in the system   | feature  | [DONE] |
+| displaying all books from the given category          | feature  | [DONE] |
+| displaying all books writen by then given Author      | feature  | [DONE] |
+| editing previously added book item                    | feature  | [DONE] |
+| removing book item completely                         | feature  | [DONE] |
+| displaying all authors from the system                | feature  | [DONE] |
+| Automation Testing / Playing with pytest-django       | testing  | [DONE] |
+| integrating different Authentication approaches       | feature  | [DONE] |
+| Automation Testing (test coverage for Authentication) | testing  | [DONE] |
+| Manual testing (curl, Postman)                        | testing  | [DONE] |
+| exploring builtin Permission mechanisms               | testing  | [DONE] |
 
 
 #### Django Shell Plus setup
@@ -217,6 +219,7 @@ Thoughts:
 What was needed?
  - BookCategory model
  - BookCategorySerializer
+ - BookViewSet (extending viewsets.ModelViewSet)
  - DefaultRouter
  - typical Django url-linking setup
  - with minimum amount of code, but specific configuration below was the output
@@ -248,7 +251,6 @@ What was needed?
  - checking how to implement different roles in Django, is there something like Custom Permissions?
 
 [NOT DONE]
- - manual testing - playing with Postman
  - GitHubActions / Heroku Deployment - to consider
 
 ```
