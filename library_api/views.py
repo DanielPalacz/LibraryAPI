@@ -8,6 +8,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import serializers  # type: ignore
 from rest_framework import viewsets
 from rest_framework.generics import ListAPIView  # type: ignore
+from rest_framework.pagination import PageNumberPagination  # type: ignore
 from rest_framework.permissions import AllowAny  # type: ignore
 from rest_framework.response import Response  # type: ignore
 from rest_framework.views import APIView  # type: ignore
@@ -18,8 +19,6 @@ from .models import BookCategory
 from .serializers import AuthorSerializer
 from .serializers import BookCategorySerializer
 from .serializers import BookSerializer
-
-# from django.shortcuts import render
 
 
 @extend_schema(
@@ -45,12 +44,18 @@ class AuthorBooksView(ListAPIView):  # type: ignore
         return author.books.all()
 
 
+class BookPagination(PageNumberPagination):  # type: ignore
+    page_size = 5  # Default 5 books on the page
+    page_size_query_param = "page_size"  # Allows to User modify number of elements on the page
+
+
 @extend_schema(
     tags=["Books"],
 )
 class BookViewSet(viewsets.ModelViewSet):  # type: ignore
     queryset = Book.objects.all().order_by("title")
     serializer_class = BookSerializer
+    pagination_class = BookPagination
 
 
 @extend_schema(
