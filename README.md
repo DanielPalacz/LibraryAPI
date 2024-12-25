@@ -23,8 +23,8 @@ Phase 3. Exploring different Authentication options
  - in terms of Authorization in this stage there is basic IsAuthenticated mode setuped via settings.py
 
 Phase 4. Exploring Authorization approaches
- - setuping some endpoints to be Admin available only
- - using custom Permission rule based on BasePermission class
+ - setuping 'users/' endpoints to be Admin available only
+ - using custom Permission rule based on BasePermission class (register/ post endpoint)
  - understanding other options in terms of Authorizations (mainly DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly)
 
 Phase 5. Exploring/integrating default DRF Filtering / Sorting / Pagination capabilities
@@ -32,6 +32,7 @@ Phase 5. Exploring/integrating default DRF Filtering / Sorting / Pagination capa
  - the same is about sorting (omitted), but it was done with queryset definition
 
 Phase 6. Implementing custom Exception handler in DRF
+ - written here: 'library_api.exceptions.custom_exception_handler' (however turned off: settings.py)
 
 Phase 7. Exploring writing custom Middleware w Django/DRF
 ```
@@ -69,7 +70,7 @@ Documentation enpoints:
  - http://127.0.0.1:8000/api/schema/swagger-ui/
  - http://127.0.0.1:8000/api/redoc/
 
-For start play with Swagg
+For start play with Swagger. But first of all Authorize bu using 'token/' endpoint.
 
 ```
 
@@ -116,7 +117,7 @@ Deliver decent, clear documentation.
 | displaying all authors from the system                | feature  | [DONE]        |
 | Automation Testing / Playing with pytest-django       | testing  | [DONE]        |
 | integrating different Authentication approaches       | feature  | [DONE]        |
-| Automation Testing (test coverage for Authentication) | testing  | [NOT STARTED] |
+| Automation Testing (test coverage for Authentication) | testing  | [DONE]        |
 | Manual testing (curl, Postman)                        | testing  | [IN PROGRESS] |
 | exploring builtin Permission mechanisms               | testing  | [DONE]        |
 
@@ -177,15 +178,21 @@ SETUP STEPS:
 
 USAGE:
 1. Run tests without Authentication-Authorization features:
-- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/
-- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/ -m "not authorization"
-- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest  -vv --cov-report=html:TestCoverageReport tests/
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m "not authorization"
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest  -vv --cov-report=html:TestCoverageReport tests/
 or set env vars explicitly:
-export DJANGO_SETTINGS_MODULE="LibraryProject.settings"
+export DJANGO_SETTINGS_MODULE="tests.settings"
 export FORCE_NO_AUTH=true
 
+With turned off Coverage package:
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m "not authorization"
+
 2. Run tests with Authentication-Authorization features:
-- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/ -m authorization
+- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m authorization
+
+With turned off Coverage package:
+- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m authorization
 ```
 
 

@@ -8,7 +8,7 @@ from .models import ExtendedUser
 class ExtendedUserSerializer(serializers.ModelSerializer):  # type: ignore
     class Meta:
         model = ExtendedUser
-        fields = ("username", "email", "password", "is_employee")
+        fields = ("id", "username", "email", "password", "is_employee")
 
 
 class LoginSerializer(serializers.Serializer):  # type: ignore
