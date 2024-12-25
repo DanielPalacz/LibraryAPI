@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers  # type: ignore
 from rest_framework import viewsets
+from rest_framework.filters import SearchFilter  # type: ignore
 from rest_framework.generics import ListAPIView  # type: ignore
 from rest_framework.pagination import PageNumberPagination  # type: ignore
 from rest_framework.permissions import AllowAny  # type: ignore
@@ -56,6 +57,8 @@ class BookViewSet(viewsets.ModelViewSet):  # type: ignore
     queryset = Book.objects.all().order_by("title")
     serializer_class = BookSerializer
     pagination_class = BookPagination
+    filter_backends = (SearchFilter,)
+    search_fields = ["title", "author__last_name"]
 
 
 @extend_schema(

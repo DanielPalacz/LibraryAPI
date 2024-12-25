@@ -28,6 +28,8 @@ Phase 4. Exploring Authorization approaches
  - understanding other options in terms of Authorizations (mainly DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly)
 
 Phase 5. Exploring/integrating default DRF Filtering / Sorting / Pagination capabilities
+ - it was amazingly small task to setup Filtering and Pagination to books/ endpoints
+ - the same is about sorting (omitted), but it was done with queryset definition
 
 Phase 6. Implementing custom Exception handler in DRF
 
