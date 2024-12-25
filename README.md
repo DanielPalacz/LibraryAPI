@@ -176,13 +176,16 @@ SETUP STEPS:
 - coverage package integration - for test coverage metrics (files: pytest.ini, .coveragerc)
 
 USAGE:
-- PYTHONPATH=. pytest -vv tests/
-- PYTHONPATH=. pytest -s -vv tests/
-- PYTHONPATH=. pytest -vv --cov-report=html:TestCoverageReport tests/
-
-Run tests without Authentication-Authorization features:
-- DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/
+1. Run tests without Authentication-Authorization features:
 - FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/ -m "not authorization"
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest  -vv --cov-report=html:TestCoverageReport tests/
+or set env vars explicitly:
+export DJANGO_SETTINGS_MODULE="LibraryProject.settings"
+export FORCE_NO_AUTH=true
+
+2. Run tests with Authentication-Authorization features:
+- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=LibraryProject.settings PYTHONPATH=. pytest -vv tests/ -m authorization
 ```
 
 
