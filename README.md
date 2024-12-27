@@ -92,6 +92,37 @@ Provide sufficient Authentication/Authorization approach.
 Deliver decent, clear documentation.
 ```
 
+
+#### Testing / pytest with other supporting libs:
+```
+SETUP STEPS:
+ - installing: pytest, pytest-django, coverage, pytest-cov
+ - preparing 'pytest.ini' file
+ - creating fixture for dynamically creating Database setup
+  --- adding specific 'test' settings.py file where sqlite3 is 'in memory' mode
+- live_server awesome builtin fixture
+- coverage package integration - for test coverage metrics (files: pytest.ini, .coveragerc)
+
+USAGE:
+1. Run tests without Authentication-Authorization features:
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m "not authorization"
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest  -vv --cov-report=html:TestCoverageReport tests/
+or set env vars explicitly:
+export DJANGO_SETTINGS_MODULE="tests.settings"
+export FORCE_NO_AUTH=true
+
+With turned off Coverage package:
+- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m "not authorization"
+
+2. Run tests with Authentication-Authorization features:
+- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m authorization
+
+With turned off Coverage package:
+- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m authorization
+```
+
+
 ---
 
 ## DIFFERENT PROJECT NOTES
@@ -168,34 +199,9 @@ USAGE:
  - python manage.py graph_models -a -o LibraryAPI_Model_DiagramClass_for_all_apps.png
 ```
 
-#### Testing / pytest with other supporting libs:
-```
-SETUP STEPS:
- - installing: pytest, pytest-django, coverage, pytest-cov
- - preparing 'pytest.ini' file
- - creating fixture for dynamically creating Database setup
-  --- adding specific 'test' settings.py file where sqlite3 is 'in memory' mode
-- live_server awesome builtin fixture
-- coverage package integration - for test coverage metrics (files: pytest.ini, .coveragerc)
 
-USAGE:
-1. Run tests without Authentication-Authorization features:
-- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/
-- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m "not authorization"
-- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest  -vv --cov-report=html:TestCoverageReport tests/
-or set env vars explicitly:
-export DJANGO_SETTINGS_MODULE="tests.settings"
-export FORCE_NO_AUTH=true
-
-With turned off Coverage package:
-- FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m "not authorization"
-
-2. Run tests with Authentication-Authorization features:
-- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m authorization
-
-With turned off Coverage package:
-- FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m authorization
-```
+---
+---
 
 
 #### Django Rest Framework notes
@@ -203,7 +209,7 @@ With turned off Coverage package:
 ```
 DRF components:
  - Serializers
- - Views, also builtin views (viewset, APIView, etc)
+ - Views, especially builtin views (viewset, APIView, etc)
  - Routers, like: DefaultRouter
  - Typical Django Url-linking approach
 
@@ -236,27 +242,6 @@ What was needed?
 
 
 
-#### Working/learning notes
-
-```
-[DONE ENOUGH FOR NOW]
- - practise defining models and relationships (OneToMany, ManyToMany)
- - practise creating serializers (inc: handling errors, data validations)
- - practise creating views using DRF builtins
- - checking routers potential, if it's worth using (checking default documentation that is created)
- - checking other option for API documentation (like  Swagger from drf-yasg)
- - automation testing - finding good approach for fixturing Web server handling all app
- - checking Django authorization/authentication builtins (views, login_required decorator)
- - checking JWT tokens (djangorestframework-simplejwt)
- - checking how to implement different roles in Django, is there something like Custom Permissions?
-
-[NOT DONE]
- - GitHubActions / Heroku Deployment - to consider
-
-```
-
----
----
 
 ## Authentication and Authorization in Django/DRF
 ```
@@ -352,4 +337,33 @@ For now it is enough. There is many options in terms of Authorization (Permissio
 There is quite many builtin / around-builtin solution in terms of Authorization (in Django/DRF)
 But next to consider would be  related to Django builtin Permission system: DjangoModelPermissions and later DjangoObjectPermissions.
 Both are more suitable for typical Frontend/Backend application when APIs will be often less demanding for Authorization systems. Worth to know that DjangoModelPermissions is really fast in terms of Development.
+```
+
+---
+
+
+### Django - MODELS - repetition questions
+```
+Basics:
+  1. What is meaning of options 'null' and 'blank' in model fields? What is difference between them?
+  2. How to set default value for the Django model field?
+  3. What are four typical types of fields on Django models?
+  4. How to change default table name correlated with Django model?
+
+Relationship between Models:
+  11. What is use case of 'related_name' in ForeignKey model field?
+  12. How to create model in Many-to-Many relationship?
+  13. What happens if we set 'on_delete=models.CASCADE' in ForeignKey model field and correlated parent object will be deleted?
+  14. How to get correlated objects in One-To-Many relationship?
+
+Operation on Models:
+  21. How to get from db all objects that meets specific condition, for example title="Django"?
+  22. How to limit query result in ORM to only first 10 be displayed?
+  23. How to use method 'save?' Can it be overiden?
+
+Advanced functionalities:
+  31. How to use signals in Django?
+  32. How to define Custom Object Manager for the model? For what can it be helpful?
+  33. What is difference between validation in model field (for example validators) and method 'clean()' in model
+  34. How to optimize ORM fetching query in relationships? What is difference between 'select_related' and 'prefetch_related'?
 ```
