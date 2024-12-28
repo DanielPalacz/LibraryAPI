@@ -31,7 +31,7 @@ class AuthorViewSet(viewsets.ModelViewSet):  # type: ignore
 
 
 @extend_schema(
-    tags=["Autor books"],
+    tags=["Author books"],
     responses=BookSerializer(many=True),
 )
 class AuthorBooksView(ListAPIView):  # type: ignore
