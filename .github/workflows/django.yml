@@ -25,4 +25,4 @@ jobs:
         pip install -r requirements_github_actions_ci.txt
     - name: Run Tests
       run: |
-        FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m "not authorization"; FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv tests/ -m authorization
+        FORCE_NO_AUTH=true DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m "not authorization"; FORCE_NO_AUTH=false DJANGO_SETTINGS_MODULE=tests.settings PYTHONPATH=. pytest -vv --cov-reset tests/ -m authorization
