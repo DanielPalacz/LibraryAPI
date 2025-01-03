@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Type
 
 from django.db.models import QuerySet
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers  # type: ignore
@@ -41,8 +42,12 @@ class AuthorBooksView(ListAPIView):  # type: ignore
 
     def get_queryset(self) -> QuerySet:  # type: ignore
         user_id = self.kwargs["pk"]
-        author = get_object_or_404(Author, pk=user_id)
-        return author.books.all()
+        # Ensure the author exists or raise a 404
+        if not Author.objects.filter(pk=user_id).exists():
+            raise Http404("Author not found")
+
+        # Optimize the query for related books
+        return Book.objects.select_related("author").filter(author__pk=user_id)
 
 
 class BookPagination(PageNumberPagination):  # type: ignore
