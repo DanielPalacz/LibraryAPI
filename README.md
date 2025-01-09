@@ -41,7 +41,7 @@ Phase 6. Implementing other custom Django/DRF components
 ```
 
 
-### SETUP STEPS:
+### SETUP STEPS (manual setup, not Docker):
 ```
 Initial project setup:
  - git clone git@github.com:DanielPalacz/LibraryAPI.git
@@ -361,7 +361,13 @@ supervisorctl status
 
 ### Log in to running container:
 docker exec -it <CONTAINER_NAME> bash
-python3 manage.py makemigrations
+
+# Run few basic setup commands:
+(python3 manage.py makemigrations)
 python3 manage.py migrate
 python3 manage.py createsuperuser
+PYTHONPATH=. python tests/populate_db.py
+
+# Or trigger script:
+PYTHONPATH=. python3 tests/initialize_db.py
 ```
