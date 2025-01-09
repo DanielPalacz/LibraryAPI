@@ -29,7 +29,7 @@ SECRET_KEY = getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS: list[str] = ["localhost", "127.0.0.1", "0.0.0.0"]
 
 
 # Application definition
@@ -130,6 +130,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [join(BASE_DIR, "static")]
 STATIC_ROOT = join(BASE_DIR, "staticfiles")
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://127.0.0.1"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

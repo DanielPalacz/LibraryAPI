@@ -10,8 +10,14 @@ services:
       - SECRET_KEY=django-insecure-password
       - DJANGO_SETTINGS_MODULE=LibraryProject.settings
       - FORCE_NO_AUTH=false
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
     ports:
       - "8000:8000"
     command: >
       sh -c "python3 manage.py collectstatic --noinput &&
              /usr/bin/supervisord -c /etc/supervisor/supervisord.conf"
+    networks:
+      - django_network
+networks:
+  django_network:
+    driver: bridge
