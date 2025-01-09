@@ -72,7 +72,7 @@ Documentation enpoints:
  - http://127.0.0.1:8000/api/schema/swagger-ui/
  - http://127.0.0.1:8000/api/redoc/
 
-For start play with Swagger. But first of all Authorize bu using 'token/' endpoint.
+For start play with Swagger. But first of all Authorize by using 'token/' endpoint.
 
 ```
 
@@ -215,8 +215,8 @@ DRF components:
 
 Thoughts:
  - DRF works bad with mypy, there is no specific stubs extension    [Minuse]
- - automates a lot, one can really fast deliver complex api       [Posisitive]
- - drf_spectacular, gives three type of documentation setup...   [Big posisitive]
+ - automates a lot, one can really fast deliver complex api       [Positive]
+ - drf_spectacular, gives three type of documentation setup...   [Big positive]
 ```
 
 
