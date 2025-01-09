@@ -40,7 +40,6 @@ prompt_toolkit==3.0.48
 ptyprocess==0.7.0
 pure_eval==0.2.3
 Pygments==2.18.0
-pygraphviz==1.14
 PyJWT==2.10.1
 pytest==8.3.4
 pytest-cov==6.0.0
@@ -59,3 +58,4 @@ uritemplate==4.1.1
 urllib3==2.2.3
 virtualenv==20.28.0
 wcwidth==0.2.13
+gunicorn==23.0.0

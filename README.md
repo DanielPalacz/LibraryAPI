@@ -338,3 +338,30 @@ There is quite many builtin / around-builtin solution in terms of Authorization 
 But next to consider would be  related to Django builtin Permission system: DjangoModelPermissions and later DjangoObjectPermissions.
 Both are more suitable for typical Frontend/Backend application when APIs will be often less demanding for Authorization systems. Worth to know that DjangoModelPermissions is really fast in terms of Development.
 ```
+
+### Dockerize solution
+```
+# Classic Dockerfile - workaround (there were issues with loading env variables during image creation):
+docker build -t django-nginx-app .
+(docker build --no-cache -t django-nginx-app .)
+docker run -it -p 8000:8000 django-nginx-app bash
+source env.sh
+python3 manage.py collectstatic --noinput
+gunicorn LibraryProject.wsgi:application --bind 0.0.0.0:8000
+
+
+# Docker compose:
+docker-compose up --build -d
+(docker-compose build --no-cache && docker-compose up -d)
+
+# Supervisor check:
+ls /var/run/supervisor.sock
+supervisorctl status
+
+
+### Log in to running container:
+docker exec -it <CONTAINER_NAME> bash
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py createsuperuser
+```
