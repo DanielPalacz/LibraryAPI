@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 
 class Author(models.Model):
-    first_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, validators=[MinLengthValidator(2)])
     last_name = models.CharField(max_length=100)
     year_of_birth_date = models.IntegerField(null=True, blank=True, default=None)
 
@@ -20,7 +21,7 @@ class BookCategory(models.Model):
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL, related_name="subcategories")
 
     def __str__(self) -> str:
-        return self.name
+        return str(self.name)
 
     class Meta:
         verbose_name_plural = "Book categories"
@@ -34,4 +35,4 @@ class Book(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.title
+        return str(self.title)
