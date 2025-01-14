@@ -110,7 +110,7 @@ class CustomApiRootView(APIView):  # type: ignore
 
     @staticmethod
     def get(request, *args, **kwargs):  # type: ignore
-        return Response(
+        response = Response(
             {
                 "drf-root": "/",
                 "authors": "/authors/",
@@ -124,3 +124,7 @@ class CustomApiRootView(APIView):  # type: ignore
                 "redoc": "/api/schema/redoc/",
             }
         )
+
+        # response.set_cookie('test-cookie', 'test', max_age=100, httponly=True, samesite="Strict")
+
+        return response

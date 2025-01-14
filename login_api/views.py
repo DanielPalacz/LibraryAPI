@@ -19,7 +19,7 @@ from login_api.serializers import ExtendedUserSerializer
 
 @extend_schema(
     summary="User Registration",
-    description="Endpoint to login_api a new user.",
+    description="Endpoint to register a new user.",
     tags=["User Management"],
     responses={
         201: OpenApiResponse(

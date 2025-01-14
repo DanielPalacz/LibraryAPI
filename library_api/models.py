@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import django.db.models
 from django.core.validators import MinLengthValidator
 from django.db import models
 

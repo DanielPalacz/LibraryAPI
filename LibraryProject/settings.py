@@ -176,6 +176,6 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,  # Hide documentation schema
 }
 
-SESSION_COOKIE_DOMAIN = "127.0.0.1"
-SESSION_ENGINE = "django.contrib.sessions.backends.db"
-CSRF_COOKIE_SECURE = False  # False for development, True for production
+# SESSION_COOKIE_DOMAIN = "127.0.0.1"
+# SESSION_ENGINE = "django.contrib.sessions.backends.db"
+# CSRF_COOKIE_SECURE = False  # False for development, True for production
