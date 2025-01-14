@@ -38,6 +38,9 @@ Phase 6. Implementing other custom Django/DRF components
    solution written for adding header dynamically from custom middleware
  - Custom Json Renderer:
    written here: 'library_api.middleware.CustomJSONRenderer' (however turned off: settings.py)
+
+Phase 7. Dockerize solution
+ - configuring supervisor linux package for running ngnix and gunicorn inside container
 ```
 
 
@@ -249,7 +252,7 @@ What was needed?
     a) BasicAuthentication, password-based Authentication
     b) Login-Based Authentication (SessionAuthentication)
     c) Token-Based Authentication (Simple version from DRF: TokenAuthentication)
-    d) Token-Based Authentication (JWT token authorization)
+    d) JWT Token-Based Authentication (JWT authentication token)
     e) OAuth2/OpenID Connect
 
 2. Authorization
